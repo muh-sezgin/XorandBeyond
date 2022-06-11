@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_Settings"
             app:destination="@id/SettingsFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_LogFragment"
+            app:destination="@id/LogFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -36,6 +39,17 @@
 
         <action
             android:id="@+id/action_SettingsFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/LogFragment"
+        android:name="com.example.xorbeyond.LogFragment"
+        android:label="settings"
+        tools:layout="@layout/fragment_log">
+
+        <action
+            android:id="@+id/action_LogFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>

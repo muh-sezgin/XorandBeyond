@@ -1,18 +1,18 @@
 
 package com.example.xorbeyond
 
+import android.net.http.SslError
 import android.os.Bundle
+import android.util.Log
+import android.view.*
+import android.webkit.SslErrorHandler
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.xorbeyond.databinding.FragmentSecondBinding
 import com.google.android.exoplayer2.*
-import com.google.android.exoplayer2.source.MediaSource
-import com.google.android.exoplayer2.source.hls.HlsMediaSource
-import com.google.android.exoplayer2.ui.StyledPlayerView
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -21,14 +21,6 @@ class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var constraintLayoutRoot: ConstraintLayout
-    private lateinit var exoPlayerView: StyledPlayerView
-
-    private lateinit var mediaSource: MediaSource
-    private lateinit var simpleExoPlayer: ExoPlayer
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,77 +35,55 @@ class SecondFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        simpleExoPlayer = ExoPlayer.Builder(this.requireContext()).build()
-
-        simpleExoPlayer.addListener(playerListener)
-
-        binding.exoPlayerView.player = simpleExoPlayer
-
-        val url : String = "https://live.kanal7.com/live/kanal7LiveMobile/index.m3u8"
-
-        simpleExoPlayer.seekTo(0)
-
-        val defaultHttpDataSourceFactory = DefaultHttpDataSource.Factory()
-
-        mediaSource = HlsMediaSource.Factory(defaultHttpDataSourceFactory).createMediaSource(
-            MediaItem.fromUri(url)
-        )
-
-        simpleExoPlayer.setMediaSource(mediaSource)
-        simpleExoPlayer.prepare()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        simpleExoPlayer.playWhenReady = true
-        simpleExoPlayer.play()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        simpleExoPlayer.pause()
-        simpleExoPlayer.playWhenReady = false
-    }
-
-    override fun onStop() {
-        super.onStop()
-        simpleExoPlayer.pause()
-        simpleExoPlayer.playWhenReady = false
-    }
+        val myWebView: WebView = view.findViewById(R.id.webView)
+        myWebView.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(
+                view: WebView,
+                url: String
+            ): Boolean {
+                view.loadUrl(url)
+                return true
 
 
-    override fun onDestroy() {
-        super.onDestroy()
+            }
 
-        simpleExoPlayer.removeListener(playerListener)
-        simpleExoPlayer.stop()
-        simpleExoPlayer.clearMediaItems()
-
-
-        _binding = null
-    }
-
-    private var playerListener = object : Player.Listener {
-        override fun onRenderedFirstFrame() {
-            super.onRenderedFirstFrame()
-            // exoPlayerView.useController = false
 
         }
-
-
-        /*
-            override fun onPlayerError(error: PlaybackException) {
-                super.onPlayerError(error)
-                Toast.makeText(this@SecondFragment.requireContext(), "$(error.message)",
-                    Toast.LENGTH_SHORT).show()
+        val webSetting: WebSettings = myWebView.settings
+        webSetting.javaScriptEnabled = true
+        myWebView.webViewClient = object : WebViewClient() {
+            override fun onReceivedSslError(
+                view: WebView,
+                handler: SslErrorHandler,
+                error: SslError
+            ) {
+                Log.d("tag", "onReceivedSslError: ")
+                handler.proceed()
             }
-    */
+        }
+
+        myWebView.canGoBack()
+        myWebView.setOnKeyListener(View.OnKeyListener { v , keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK
+
+                && event.action == MotionEvent.ACTION_UP
+                && myWebView.canGoBack()){
+                myWebView.goBack()
+                return@OnKeyListener true
+            }
+            false
+        })
+
+
+        myWebView.loadUrl("http://192.168.137.176:5002/")
+        myWebView.settings.javaScriptEnabled = true
+        myWebView.settings.allowContentAccess = true
+        myWebView.settings.domStorageEnabled = true
+        myWebView.settings.useWideViewPort = true
+
 
     }
 
 }
-
 
 
