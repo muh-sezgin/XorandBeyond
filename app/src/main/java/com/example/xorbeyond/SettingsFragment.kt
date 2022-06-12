@@ -1,25 +1,18 @@
 package com.example.xorbeyond
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.xorbeyond.databinding.FragmentSettingsBinding
-import okhttp3.*
-import org.json.JSONArray
-import org.json.JSONObject
-import java.io.IOException
-
-
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class SettingsFragment : Fragment() {
-
+    //nothing here to see yet
     private var _binding: FragmentSettingsBinding? = null
 
     // This property is only valid between onCreateView and

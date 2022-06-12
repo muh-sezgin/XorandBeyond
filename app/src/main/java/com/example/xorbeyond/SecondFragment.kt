@@ -11,7 +11,8 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import com.example.xorbeyond.databinding.FragmentSecondBinding
-import com.google.android.exoplayer2.*
+import com.example.xorbeyond.MainActivity.Companion.baseURL
+
 
 
 /**
@@ -34,6 +35,7 @@ class SecondFragment : Fragment() {
 
     }
 
+    //put webview from url
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val myWebView: WebView = view.findViewById(R.id.webView)
         myWebView.webViewClient = object : WebViewClient() {
@@ -43,11 +45,7 @@ class SecondFragment : Fragment() {
             ): Boolean {
                 view.loadUrl(url)
                 return true
-
-
             }
-
-
         }
         val webSetting: WebSettings = myWebView.settings
         webSetting.javaScriptEnabled = true
@@ -74,13 +72,11 @@ class SecondFragment : Fragment() {
             false
         })
 
-
-        myWebView.loadUrl("http://192.168.137.176:5002/")
+        myWebView.loadUrl(baseURL)
         myWebView.settings.javaScriptEnabled = true
         myWebView.settings.allowContentAccess = true
         myWebView.settings.domStorageEnabled = true
         myWebView.settings.useWideViewPort = true
-
 
     }
 

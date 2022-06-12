@@ -11,10 +11,10 @@ import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
+import com.example.xorbeyond.MainActivity.Companion.baseURL
 
-/**
- * A simple [Fragment] subclass.
- */
+//fragment for log page
+//get json from url and put it into list
 class LogFragment : Fragment() {
     val client = OkHttpClient()
     override fun onCreateView(
@@ -29,10 +29,11 @@ class LogFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val context = context as MainActivity
-        var request = Request.Builder().url("http://192.168.137.176:5002/id")
+        val request = Request.Builder().url(baseURL + "id")
             .get().build()
         var jsonarray_info:JSONArray ?= null
         var received = false
+        //get response
         client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
                 //println(response.body?.string())
@@ -52,11 +53,40 @@ class LogFragment : Fragment() {
         val lv = context.findViewById(R.id.visayas_mindanao_lview) as ListView
         var list = ArrayList<String>()
 
+        //parse response and add it into list
         for (i in 0 until jsonarray_info!!.length()) {
+            var eventType = ((jsonarray_info?.get(i) as JSONObject).get("Event Type").toString())
+            var logOfEvent = ""
+            if(eventType == "Intrusion") {
+                logOfEvent += "Intrusion"
+            }
+            else if(eventType == "Anomalous Activity") {
+                logOfEvent += "Anomalous Activity"
+            }
 
-            list.add(jsonarray_info?.get(i).toString())
+            else if(eventType == "Malfunction") {
+                logOfEvent += "Malfunction"
+            }
+
+            else {
+                logOfEvent += ((jsonarray_info?.get(i) as JSONObject).get("Subject").toString())
+                logOfEvent += " entered"
+            }
+
+            logOfEvent += " from "
+
+            logOfEvent += ((jsonarray_info?.get(i) as JSONObject).get("Event Location").toString())
+
+            logOfEvent += " at "
+
+            logOfEvent += ((jsonarray_info?.get(i) as JSONObject).get("Event Time").toString())
+
+            list.add(logOfEvent)
         }
+        //reverse list to have newest log first
+        list.reverse()
 
+        //listview creater
         val adapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, list)
         lv.adapter = adapter
     }

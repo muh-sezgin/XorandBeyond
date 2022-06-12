@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.XorBeyond">
         android:usesClearTextTraffic="true">
+        android:name=".MyApplication"
 
         <activity
             android:name=".MainActivity"
