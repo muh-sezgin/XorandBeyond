@@ -44,6 +44,10 @@ class FirstFragment : Fragment() {
             findNavController().navigate(R.id.action_FirstFragment_to_LogFragment)
         }
 
+        binding.buttonProfiles.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_ProfilesFragment)
+        }
+
     }
 
     override fun onDestroyView() {

@@ -3,10 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Muhammet Sezgin/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Muhammet Sezgin/Desktop/XorandBeyond/app/src/main/res/layout/content_main.xml" value="0.22146739130434784" />
+        <entry key="..\:/Users/Muhammet Sezgin/Desktop/XorandBeyond/app/src/main/res/layout/custom_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Muhammet Sezgin/Desktop/XorandBeyond/app/src/main/res/layout/fragment_first.xml" value="0.10277777777777777" />
+        <entry key="..\:/Users/Muhammet Sezgin/Desktop/XorandBeyond/app/src/main/res/layout/fragment_profiles.xml" value="0.1" />
         <entry key="..\:/Users/Muhammet Sezgin/Desktop/XorandBeyond/app/src/main/res/layout/fragment_second.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/Muhammet Sezgin/Desktop/XorandBeyond/app/src/main/res/layout/fragment_settings.xml" value="0.1" />
+        <entry key="..\:/Users/Muhammet Sezgin/Desktop/XorandBeyond/app/src/main/res/menu/menu_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Muhammet Sezgin/Desktop/XorandBeyond/app/src/main/res/xml/root_preferences.xml" value="0.25416666666666665" />
         <entry key="..\:/XorandBeyond/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/XorandBeyond/app/src/main/res/layout/content_main.xml" value="0.25416666666666665" />
         <entry key="..\:/XorandBeyond/app/src/main/res/layout/fragment_first.xml" value="0.1" />

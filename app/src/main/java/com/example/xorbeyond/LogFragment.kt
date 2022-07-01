@@ -1,6 +1,7 @@
 package com.example.xorbeyond
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,8 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 import com.example.xorbeyond.MainActivity.Companion.baseURL
+import com.example.xorbeyond.MainActivity.Companion.profileUpdateList
+import java.lang.Thread.sleep
 
 //fragment for log page
 //get json from url and put it into list
@@ -36,6 +39,7 @@ class LogFragment : Fragment() {
         //get response
         client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
+
                 //println(response.body?.string())
                 var str_response = response.body!!.string()
 
@@ -48,7 +52,7 @@ class LogFragment : Fragment() {
             }
         })
         while(!received) {
-
+            Log.d("ttt", "waiting")
         }
         val lv = context.findViewById(R.id.visayas_mindanao_lview) as ListView
         var list = ArrayList<String>()
@@ -69,7 +73,14 @@ class LogFragment : Fragment() {
             }
 
             else {
-                logOfEvent += ((jsonarray_info?.get(i) as JSONObject).get("Subject").toString())
+                var currentSubject = ((jsonarray_info?.get(i) as JSONObject).get("Subject").toString())
+
+                if(!profileUpdateList?.get(currentSubject).isNullOrBlank()) {
+                    currentSubject = profileUpdateList?.get(currentSubject).toString()
+
+                }
+
+                logOfEvent += currentSubject
                 logOfEvent += " entered"
             }
 

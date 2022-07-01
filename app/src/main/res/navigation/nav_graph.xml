@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_LogFragment"
             app:destination="@id/LogFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_ProfilesFragment"
+            app:destination="@id/ProfilesFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -50,6 +53,17 @@
 
         <action
             android:id="@+id/action_LogFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ProfilesFragment"
+        android:name="com.example.xorbeyond.ProfilesFragment"
+        android:label="settings"
+        tools:layout="@layout/fragment_log">
+
+        <action
+            android:id="@+id/action_ProfilesFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>
